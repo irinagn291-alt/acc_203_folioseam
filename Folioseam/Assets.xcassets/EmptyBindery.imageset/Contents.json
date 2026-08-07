@@ -1,0 +1,6 @@
+{
+  "images" : [
+    { "filename" : "empty.png", "idiom" : "universal", "scale" : "1x" }
+  ],
+  "info" : { "author" : "folioseam", "version" : 1 }
+}
