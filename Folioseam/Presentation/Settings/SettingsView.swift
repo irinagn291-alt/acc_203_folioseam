@@ -44,6 +44,10 @@ struct SettingsView: View {
                     }
                 }
             }
+            Section("Support") {
+                Link("Website", destination: GateConfig.siteURL)
+                Link("Contact Us", destination: GateConfig.contactURL)
+            }
             Section("About") {
                 LabeledContent("App", value: "Folioseam")
                 LabeledContent("Focus", value: "Bookbinding desk")
