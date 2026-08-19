@@ -103,6 +103,7 @@ struct ExportHubView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .binderyCanvas()
         .task { await viewModel.refresh() }
+        .onAppear { Task { await viewModel.refresh() } }
         .sheet(isPresented: $showShare) {
             if let url = viewModel.shareURL {
                 ShareSheet(items: [url])

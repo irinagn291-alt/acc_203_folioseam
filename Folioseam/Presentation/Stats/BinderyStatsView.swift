@@ -52,6 +52,7 @@ struct BinderyStatsView: View {
         }
         .binderyCanvas()
         .task { await viewModel.refresh() }
+        .onAppear { Task { await viewModel.refresh() } }
     }
 
     private func summaryGrid(_ s: BinderyStatsSnapshot) -> some View {

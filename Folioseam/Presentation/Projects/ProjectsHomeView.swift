@@ -90,6 +90,7 @@ struct ProjectsHomeView: View {
             }
         }
         .task { await viewModel.refresh() }
+        .onAppear { Task { await viewModel.refresh() } }
         .onChange(of: coordinator.sheet) { _, newValue in
             if newValue == nil { Task { await viewModel.refresh() } }
         }

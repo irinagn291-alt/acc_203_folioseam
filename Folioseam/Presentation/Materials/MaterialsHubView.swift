@@ -150,6 +150,7 @@ struct MaterialsHubView: View {
             }
         }
         .task { await viewModel.refresh() }
+        .onAppear { Task { await viewModel.refresh() } }
         .sheet(isPresented: $viewModel.isPresentingEditor) {
             if let editing = viewModel.editing {
                 MaterialEditorView(draft: editing) { saved in

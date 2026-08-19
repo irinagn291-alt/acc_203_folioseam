@@ -11,6 +11,11 @@ final class SeamContainer {
     let conditionRepository: ConditionRecordRepository
     let introSpine: SeamOnboardingPort
     let preferencesStore: PreferencesStore
+    private var projectsHomeViewModel: ProjectsHomeViewModel?
+    private var materialsViewModel: MaterialsHubViewModel?
+    private var statsViewModel: BinderyStatsViewModel?
+    private var exportViewModel: ExportHubViewModel?
+    private var settingsViewModel: SettingsViewModel?
 
     init(
         store: SeamDataStore,
@@ -84,7 +89,10 @@ final class SeamContainer {
     }
 
     func makeProjectsViewModel() -> ProjectsHomeViewModel {
-        ProjectsHomeViewModel(loadProjects: loadProjects, deleteProject: deleteProject, loadBundle: loadProjectBundle, computeProgress: computeProgress)
+        if let projectsHomeViewModel { return projectsHomeViewModel }
+        let viewModel = ProjectsHomeViewModel(loadProjects: loadProjects, deleteProject: deleteProject, loadBundle: loadProjectBundle, computeProgress: computeProgress)
+        projectsHomeViewModel = viewModel
+        return viewModel
     }
 
     func makeProjectDetailViewModel(projectID: UUID) -> ProjectDetailViewModel {
@@ -107,18 +115,30 @@ final class SeamContainer {
     }
 
     func makeMaterialsViewModel() -> MaterialsHubViewModel {
-        MaterialsHubViewModel(loadProjects: loadProjects, loadBundle: loadProjectBundle, saveMaterial: saveMaterial)
+        if let materialsViewModel { return materialsViewModel }
+        let viewModel = MaterialsHubViewModel(loadProjects: loadProjects, loadBundle: loadProjectBundle, saveMaterial: saveMaterial)
+        materialsViewModel = viewModel
+        return viewModel
     }
 
     func makeExportViewModel() -> ExportHubViewModel {
-        ExportHubViewModel(loadProjects: loadProjects, exportProject: exportProject, importProject: importProject)
+        if let exportViewModel { return exportViewModel }
+        let viewModel = ExportHubViewModel(loadProjects: loadProjects, exportProject: exportProject, importProject: importProject)
+        exportViewModel = viewModel
+        return viewModel
     }
 
     func makeStatsViewModel() -> BinderyStatsViewModel {
-        BinderyStatsViewModel(loadStats: loadBinderyStats)
+        if let statsViewModel { return statsViewModel }
+        let viewModel = BinderyStatsViewModel(loadStats: loadBinderyStats)
+        statsViewModel = viewModel
+        return viewModel
     }
 
     func makeSettingsViewModel() -> SettingsViewModel {
-        SettingsViewModel(preferencesStore: preferencesStore, resetData: resetData)
+        if let settingsViewModel { return settingsViewModel }
+        let viewModel = SettingsViewModel(preferencesStore: preferencesStore, resetData: resetData)
+        settingsViewModel = viewModel
+        return viewModel
     }
 }
